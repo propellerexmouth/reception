@@ -1,6 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import moment from 'moment';
-import { Avatar, Badge, Layout, List, Icon, Typography } from 'antd';
+import {
+  Avatar,
+  Badge,
+  Layout,
+  List,
+  Icon,
+  Typography,
+  notification,
+} from 'antd';
 
 import './App.css';
 
@@ -82,6 +90,20 @@ function App() {
         // TODO - check for tag in tags and set status
 
         loadLogs();
+
+        if (tag.next_direction === 1) {
+          notification.open({
+            icon: <Icon type="login" style={{ color: '#20B7BE' }} />,
+            message: `${tag.first_name} ${tag.last_name}`,
+            description: 'Has signed in',
+          });
+        } else {
+          notification.open({
+            icon: <Icon type="logout" style={{ color: '#ccc' }} />,
+            message: `${tag.first_name} ${tag.last_name}`,
+            description: 'Has signed out',
+          });
+        }
       }
     };
   }, []);
